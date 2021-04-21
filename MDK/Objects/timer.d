@@ -35,3 +35,6 @@
 .\objects\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\timer.o: ..\User\BSP\struct_all.h
+.\objects\timer.o: ..\User\BSP\MPU6050.h
+.\objects\timer.o: ..\User\BSP\pwm.h

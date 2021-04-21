@@ -39,7 +39,9 @@
 .\objects\tasks.o: ..\User\BSP\Timer.h
 .\objects\tasks.o: ..\User\APP\Tasks.h
 .\objects\tasks.o: ..\User\BSP\MPU6050.h
-.\objects\tasks.o: ..\User\BSP\GPIO.h
 .\objects\tasks.o: ..\User\APP\Control.h
 .\objects\tasks.o: ..\User\BSP\struct_all.h
 .\objects\tasks.o: ..\User\BSP\Rc.h
+.\objects\tasks.o: ..\User\APP\Filter.h
+.\objects\tasks.o: ..\User\APP\Maths.h
+.\objects\tasks.o: ..\User\APP\IMU.h

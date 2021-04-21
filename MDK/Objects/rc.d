@@ -35,3 +35,7 @@
 .\objects\rc.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\rc.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\rc.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\rc.o: ..\User\BSP\struct_all.h
+.\objects\rc.o: ..\User\BSP\MPU6050.h
+.\objects\rc.o: ..\User\BSP\Timer.h
+.\objects\rc.o: ..\User\BSP\pwm.h

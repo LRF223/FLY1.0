@@ -36,3 +36,5 @@
 .\objects\mpu6050.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\mpu6050.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\mpu6050.o: ..\User\BSP\sys.h
+.\objects\mpu6050.o: ..\User\BSP\Timer.h
+.\objects\mpu6050.o: ..\User\BSP\pwm.h

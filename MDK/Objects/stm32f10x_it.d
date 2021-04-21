@@ -29,3 +29,14 @@
 .\objects\stm32f10x_it.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\stm32f10x_it.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\objects\stm32f10x_it.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\stm32f10x_it.o: ..\User\APP\Tasks.h
+.\objects\stm32f10x_it.o: ..\User\BSP\struct_all.h
+.\objects\stm32f10x_it.o: ..\User\BSP\MPU6050.h
+.\objects\stm32f10x_it.o: ..\User\BSP\Usart.h
+.\objects\stm32f10x_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\stm32f10x_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\stm32f10x_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\stm32f10x_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\stm32f10x_it.o: ..\User\BSP\sys.h
+.\objects\stm32f10x_it.o: ..\User\BSP\Timer.h
+.\objects\stm32f10x_it.o: ..\User\BSP\pwm.h

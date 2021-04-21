@@ -1,24 +1,26 @@
 #include "stm32f10x.h" 
-#include "Sys.h"
-#include "Delay.h"
 #include "Tasks.h"
-#include <math.h>
-#include "Usart.h"
-#include "Rc.h"
 #include "struct_all.h"
-#include "GPIO.h"
-#include "Control.h"
-
-
 
 int main (void)
 {	
-	BSP_Init();
-	MPU6050_Init();
-		
+	BSP_Init();					//µ×²ãÇý¶¯³õÊ¼»¯	
 	while(1)
-	{			
-		Task_Loop();		
-		
+	{
+		if(Count_1ms>=1)
+		{	
+			Count_1ms = 0;
+			Task_1000HZ();
+		}
+		if(Count_2ms>=2)
+		{
+			Count_2ms = 0;
+			Task_500HZ();
+		}
+		if(Count_4ms>=4)
+		{
+			Count_4ms = 0;
+			Task_250HZ();
+		}
 	}
 }

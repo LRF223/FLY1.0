@@ -37,4 +37,8 @@
 .\objects\control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\control.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\control.o: ..\User\BSP\Timer.h
+.\objects\control.o: ..\User\BSP\pwm.h
 .\objects\control.o: ..\User\BSP\Rc.h
+.\objects\control.o: ..\User\BSP\delay.h
+.\objects\control.o: ..\User\APP\Maths.h

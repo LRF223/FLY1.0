@@ -5,17 +5,8 @@
 /******************************************************************************
 							宏定义
 *******************************************************************************/ 
-//#define Debug1_Pin	GPIO_Pin_5	//用于测量程序运行速率
-//#define	Debug1_H   	GPIOB->BSRR = Debug1_Pin //高电平
-//#define	Debug1_L   	GPIOB->BRR  = Debug1_Pin //低电平
-
-//#define Debug2_Pin	GPIO_Pin_9		
-//#define	Debug2_H   	GPIOB->BSRR = Debug2_Pin 
-//#define	Debug2_L   	GPIOB->BRR  = Debug2_Pin 
-
-//#define Debug3_Pin	GPIO_Pin_8		
-//#define	Debug3_H   	GPIOB->BSRR = Debug3_Pin 
-//#define	Debug3_L   	GPIOB->BRR  = Debug3_Pin 
+#define SCL_Pin 	GPIO_Pin_10
+#define SDA_Pin 	GPIO_Pin_11
 
 /******************************************************************************
 							全局变量声明
@@ -27,17 +18,16 @@ extern uint32_t I2C_Erro;
 /******************************************************************************
 							全局函数声明
 *******************************************************************************/ 
-uint8_t MPU6050_Init(void);
+uint8_t InitMPU6050(void);
 uint8_t MPU6050_SequenceRead(void);
+uint8_t MPU6050_Init(void);
 void I2C_MPU6050_Init(void);
 void MPU6050_SingleRead(void);
 void MPU6050_Compose(void);
 void MPU6050_Printf(void);
 void Do_ACC_Offset(void);
 void Do_GYRO_Offset(void);
-void I2C_delay(int delay);
-static uint8_t Single_ReadI2C(unsigned char Regs_Addr);
-static uint8_t Single_WriteI2C(unsigned char Regs_Addr,unsigned char Regs_Data);
+
 /******************************************************************************
 							定义MPU6050寄存器地址
 *******************************************************************************/ 

@@ -4,7 +4,28 @@
 
 #include "MPU6050.h"
 #include "Usart.h"
+#include "Timer.h"
+#include "pwm.h"
 
+/******************************************************************************
+							宏定义
+*******************************************************************************/
+#define Lock_Mode (1<<0)//锁尾
+#define Led_Mode  (1<<1)//夜间模式
+
+
+/******************************************************************************
+							全局函数声明
+*******************************************************************************/ 
+
+void EEPROM_INIT(void);
+void EEPROM_SAVE_ACC_OFFSET(void);
+void EEPROM_READ_ACC_OFFSET(void);
+void EEPROM_SAVE_GYRO_OFFSET(void);
+void EEPROM_READ_GYRO_OFFSET(void);
+void EEPROM_SAVE_PID(void);
+void EEPROM_READ_PID(void);
+void PID_Reset(void);
 
 /******************************************************************************
 							结构体声明
@@ -81,7 +102,4 @@ extern struct _pid gyro_pitch;
 extern struct _pid gyro_roll;
 extern struct _pid gyro_yaw;
 
-
-
 #endif
-

@@ -1,10 +1,11 @@
 #include "struct_all.h"
+#include "MPU6050.h"
+#include "Usart.h"
 
 /******************************************************************************
 							宏定义
 *******************************************************************************/ 
-#define SCL_Pin 	GPIO_Pin_10
-#define SDA_Pin 	GPIO_Pin_11
+
 
 #define	SCL_H   	{GPIOB->BSRR = SCL_Pin;I2C_delay(4);}	 //SCL高电平
 #define	SCL_L   	{GPIOB->BRR  = SCL_Pin;I2C_delay(4);}	 //SCL低电平
@@ -24,18 +25,13 @@ uint32_t I2C_Erro=0;
 static uint8_t	MPU6050_Buffer[14];	//I2C读取数据缓存
 
 /******************************************************************************
-函数原型:	void I2C2_Int(void)
+函数原型:	void I2C_MPU6050_Init(void)
 功　　能:	初始化I2C总线
 *******************************************************************************/ 
 void I2C_MPU6050_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB , ENABLE); //打开外设B的时钟
-
-//	GPIO_InitStructure.GPIO_Pin = Debug1_Pin | Debug2_Pin | Debug3_Pin; //用于测量程序运行速率
-//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; //推挽输出
-//	GPIO_Init(GPIOB, &GPIO_InitStructure);		
 
 	GPIO_InitStructure.GPIO_Pin = SCL_Pin; //SCL
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
@@ -47,36 +43,7 @@ void I2C_MPU6050_Init(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD; //开漏输出
 	GPIO_Init(GPIOB, &GPIO_InitStructure);	
 	
-	USART1_printf("\r\n I2C_MPU6050 Init Complete");
-}
-
-/******************************************************************************
-函数原型：	uint8_t MPU6050_SingleRead(void)
-功    能：	初始化MPU6050
-返 回 值：	0出错；1成功
-*******************************************************************************/ 
-uint8_t MPU6050_Init(void)
-{
-	if( Single_ReadI2C(WHO_AM_I) != 0x68)//检查MPU6050是否正常
-	{
-		USART1_printf("\r\n MPU6050 Abnormal Operation");
-		return 0;
-	}
-	
-	USART1_printf("\r\n MPU6050 Normal Operation");
-	Single_WriteI2C(PWR_MGMT_1, 0x00);	//电源管理，典型值：0x00，正常模式
-	I2C_delay(20000); //约2.5ms延时
-	Single_WriteI2C(SMPLRT_DIV, 0x00);	//陀螺仪采样率，典型值：0x00，不分频（8KHZ）
-	I2C_delay(20000);            
-	Single_WriteI2C(CONFIG2, 0x00);   	//低通滤波频率，典型值：0x00，不启用MPU6050自带滤波
-	I2C_delay(20000);
-	Single_WriteI2C(GYRO_CONFIG, 0x18);	//陀螺仪自检及测量范围，典型值：0x18(不自检，2000deg/s)
-	I2C_delay(20000);
-	Single_WriteI2C(ACCEL_CONFIG, 0x1F);//加速计自检、测量范围及高通滤波频率，典型值：0x1F(不自检，16G)
-	I2C_delay(20000);
-	
-	USART1_printf("\r\n MPU6050 Initialization Complete");
-	return 1;
+//	PrintString("\r\n 模拟I2C  初始化完成！");
 }
 
 /******************************************************************************
@@ -326,7 +293,34 @@ void MPU6050_SingleRead(void)
 		MPU6050_Buffer[12] = Single_ReadI2C(GYRO_ZOUT_H);
 		MPU6050_Buffer[13] = Single_ReadI2C(GYRO_ZOUT_L);
 }
-
+/******************************************************************************
+函数原型：	uint8_t MPU6050_SingleRead(void)
+功    能：	初始化MPU6050
+返 回 值：	0出错；1成功
+*******************************************************************************/ 
+uint8_t MPU6050_Init(void)
+{
+	if( Single_ReadI2C(WHO_AM_I) != 0x68)//检查MPU6050是否正常
+	{
+		USART1_printf("\r\n Can not find MPU6050");
+		return 0;
+	}
+	
+  USART1_printf("\r\n Find MPU6050 successfully");
+	Single_WriteI2C(PWR_MGMT_1, 0x00);	//电源管理，典型值：0x00，正常模式
+	I2C_delay(20000); //约2.5ms延时
+	Single_WriteI2C(SMPLRT_DIV, 0x00);	//陀螺仪采样率，典型值：0x00，不分频（8KHZ）
+	I2C_delay(20000);            
+	Single_WriteI2C(CONFIG2, 0x00);   	//低通滤波频率，典型值：0x00，不启用MPU6050自带滤波
+	I2C_delay(20000);
+	Single_WriteI2C(GYRO_CONFIG, 0x18);	//陀螺仪自检及测量范围，典型值：0x18(不自检，2000deg/s)
+	I2C_delay(20000);
+	Single_WriteI2C(ACCEL_CONFIG, 0x1F);//加速计自检、测量范围及高通滤波频率，典型值：0x1F(不自检，16G)
+	I2C_delay(20000);
+	
+  USART1_printf("\r\n MPU6050 Init Complete");
+	return 1;
+}
 /******************************************************************************
 函数原型：	void Do_ACC_Offset(void)
 功    能：	MPU6050加速度零偏校正
@@ -384,6 +378,7 @@ void MPU6050_Offset(void)
 //			EEPROM_SAVE_ACC_OFFSET();
 			
 		}
+//		LED3_ON;
 	}
 	
 	if(GYRO_Offset)
@@ -418,6 +413,7 @@ void MPU6050_Offset(void)
 			GYRO_Offset = 0;
 //			EEPROM_SAVE_GYRO_OFFSET();
 		}
+//		LED3_ON;
 	}
 }
 
@@ -436,6 +432,22 @@ void MPU6050_Compose(void)
 	gyro.z = ((((int16_t)MPU6050_Buffer[12]) << 8) | MPU6050_Buffer[13]) - offset_gyro.z;
 	
 	MPU6050_Offset();
+}
+
+/******************************************************************************
+函数原型：	void MPU6050_Printf(void)
+功    能：	输出MPU6050的原始数据
+*******************************************************************************/ 
+void MPU6050_Printf(void)
+{
+//	PrintString("\r\nMPU6050 acc:\r\n");
+//	PrintS16(acc.x);
+//	PrintS16(acc.y);
+//	PrintS16(acc.z);
+//	PrintString("\r\nMPU6050 gyro\r\n");
+//	PrintS16(gyro.x);
+//	PrintS16(gyro.y);
+//	PrintS16(gyro.z);
 }
 
 

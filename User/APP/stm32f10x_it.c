@@ -23,7 +23,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-
+#include "Tasks.h"
+#include "struct_all.h"
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -38,6 +39,22 @@
 /******************************************************************************/
 /*            Cortex-M3 Processor Exceptions Handlers                         */
 /******************************************************************************/
+
+uint8_t Count_1ms,Count_2ms,Count_4ms;
+void TIM3_IRQHandler(void)//Timer3中断
+{	
+	if(TIM3->SR & TIM_IT_Update)
+	{     
+		TIM3->SR = ~TIM_FLAG_Update;//清除中断标志
+		
+		if( Bsp_Int_Ok == 0 )	return;//硬件未初始化完成，则返回
+		Timer3_Count++;
+		Count_1ms++;
+		Count_2ms++;
+		Count_4ms++;
+	}
+}
+
 
 /**
   * @brief  This function handles NMI exception.

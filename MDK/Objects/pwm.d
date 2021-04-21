@@ -30,3 +30,11 @@
 .\objects\pwm.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\pwm.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\objects\pwm.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\pwm.o: ..\User\BSP\struct_all.h
+.\objects\pwm.o: ..\User\BSP\MPU6050.h
+.\objects\pwm.o: ..\User\BSP\Usart.h
+.\objects\pwm.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\pwm.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\pwm.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\pwm.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\pwm.o: ..\User\BSP\Timer.h

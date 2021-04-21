@@ -1,5 +1,5 @@
 .\objects\struct_all.o: ..\User\BSP\Struct_All.c
-.\objects\struct_all.o: ..\User\BSP\struct_all.h
+.\objects\struct_all.o: ..\User\BSP\EEPROM.h
 .\objects\struct_all.o: D:\keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
 .\objects\struct_all.o: ..\Library\CMSIS\CoreSupport\core_cm3.h
 .\objects\struct_all.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -29,6 +29,7 @@
 .\objects\struct_all.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\struct_all.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\objects\struct_all.o: ..\Library\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\struct_all.o: ..\User\BSP\struct_all.h
 .\objects\struct_all.o: ..\User\BSP\MPU6050.h
 .\objects\struct_all.o: ..\User\BSP\Usart.h
 .\objects\struct_all.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
@@ -36,3 +37,5 @@
 .\objects\struct_all.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\struct_all.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\struct_all.o: ..\User\BSP\sys.h
+.\objects\struct_all.o: ..\User\BSP\Timer.h
+.\objects\struct_all.o: ..\User\BSP\pwm.h
