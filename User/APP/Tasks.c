@@ -48,6 +48,10 @@ void BSP_Init(void)
 	while( MPU6050_Init() != 1);										//若MPU6050初始化不成功，则程序不向下运行
 	FLASH_Unlock();																	//Flash解锁
 	EEPROM_INIT();																	//初始化模拟的EEPROM，读取参数
+	
+	Do_GYRO_Offset();//校正陀螺仪
+	Do_ACC_Offset(); //校正加速度计
+	
 	Bsp_Int_Ok = 1;
 	USART1_printf("\r\n Bsp Init Finish"); 	
 }

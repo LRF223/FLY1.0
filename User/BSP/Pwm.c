@@ -6,8 +6,8 @@
 函数原型：	void TIM4_PWM_Init(u16 arr,u16 psc)
 功    能：	tim4初始化
 *******************************************************************************/ 
-void TIM4_PWM_Init(u16 arr,u16 psc)
-	{  														//TIM4 PWM初始化 arr重装载值 psc预分频系数
+void TIM4_PWM_Init(u16 arr,u16 psc)//TIM4 PWM初始化 arr重装载值 psc预分频系数
+	{  														
     GPIO_InitTypeDef    		 GPIO_InitStrue;
     TIM_OCInitTypeDef    		 TIM_OCInitStrue;
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseInitStrue;
@@ -40,7 +40,7 @@ void TIM4_PWM_Init(u16 arr,u16 psc)
 		TIM_OC4Init(TIM4,&TIM_OCInitStrue);  							
 		TIM_OC4PreloadConfig(TIM4,TIM_OCPreload_Enable);      			  //使能预装载寄存器		
 
-//		TIM_ARRPreloadConfig(TIM4, ENABLE); //使能TIM4在ARR上的预装载寄存器
+		TIM_ARRPreloadConfig(TIM4, ENABLE); //使能TIM4在ARR上的预装载寄存器
 		TIM_Cmd(TIM4, ENABLE);  //使能TIM4外设
    
 }
@@ -51,14 +51,14 @@ void TIM4_PWM_Init(u16 arr,u16 psc)
 *******************************************************************************/ 
 void Motor_Out(int16_t duty1,int16_t duty2,int16_t duty3,int16_t duty4)
 {
-//	if(duty1>1000)	duty1=1000;
-//	if(duty1<0)		duty1=0;
-//	if(duty2>1000)	duty2=1000;
-//	if(duty2<0)		duty2=0;
-//	if(duty3>1000)	duty3=1000;
-//	if(duty3<0)		duty3=0;
-//	if(duty4>1000)	duty4=1000;
-//	if(duty4<0)		duty4=0;
+	if(duty1>2000)	duty1=2000;
+	if(duty1<1000)	duty1=1000;
+	if(duty2>2000)	duty2=2000;
+	if(duty2<1000)	duty2=1000;
+	if(duty3>2000)	duty3=2000;
+	if(duty3<1000)	duty3=1000;
+	if(duty4>2000)	duty4=2000;
+	if(duty4<1000)	duty4=1000;
 	
 	TIM4->CCR1 = duty1;
 	TIM4->CCR2 = duty2;

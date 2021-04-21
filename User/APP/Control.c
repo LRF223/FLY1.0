@@ -91,9 +91,9 @@ void Control_Angle(struct _out_angle *angle,struct _Rc *rc)
 	if(rc->PITCH>1490 && rc->PITCH<1510)	
 		rc->PITCH=1500;
 //////////////////////////////////////////////////////////////////
-	if(rc->AUX1>1495 && rc->AUX1<1505)	
+//	if(rc->AUX1>1495 && rc->AUX1<1505)	
 		rc->AUX1=1500;
-	if(rc->AUX2>1495 && rc->AUX2<1505)	
+//	if(rc->AUX2>1495 && rc->AUX2<1505)	
 		rc->AUX2=1500;
 //////////////////////////////////////////////////////////////////
 	control_angle.roll  = angle->roll  - (rc->ROLL  -1500)/13.0f + (rc->AUX2 -1500)/100.0f;
@@ -123,7 +123,7 @@ void Control_Angle(struct _out_angle *angle,struct _Rc *rc)
 	if(pitch.integral < -angle_integral_max)
 	   pitch.integral = -angle_integral_max;
 //////////////////////////////////////////////////////////////////
-	if(rc->THROTTLE<1000)//油门较小时，积分清零
+	if(rc->THROTTLE<1200)//油门较小时，积分清零
 	{
 		roll.integral  = 0;
 		pitch.integral = 0;
@@ -152,7 +152,7 @@ void Control_Gyro(struct _SI_float *gyro,struct _Rc *rc,uint8_t Lock)
 //////////////////////////////////////////////////////////////////
 	if(rc->YAW>1400 && rc->YAW<1600)
 		rc->YAW=1500;
-	if(rc->AUX3>1495 && rc->AUX3<1505)	
+//	if(rc->AUX3>1495 && rc->AUX3<1505)	
 		rc->AUX3=1500;
 //////////////////////////////////////////////////////////////////
 	control_gyro.roll  = -roll.output - gyro->y*Radian_to_Angle;
@@ -198,7 +198,7 @@ void Control_Gyro(struct _SI_float *gyro,struct _Rc *rc,uint8_t Lock)
 	if(gyro_yaw.integral < -gyro_integral_max)
 	   gyro_yaw.integral = -gyro_integral_max;
 //////////////////////////////////////////////////////////////////
-	if(rc->THROTTLE<1000)//油门较小时，积分清零
+	if(rc->THROTTLE<1200)//油门较小时，积分清零
 	{
 		gyro_yaw.integral  = 0;
 	}
@@ -211,12 +211,12 @@ void Control_Gyro(struct _SI_float *gyro,struct _Rc *rc,uint8_t Lock)
 	last_gyro.pitch=control_gyro.pitch;
 	last_gyro.yaw  =control_gyro.yaw;
 //////////////////////////////////////////////////////////////////
-	if(rc->THROTTLE>1000 && Lock==0)
+	if(rc->THROTTLE>1200 && Lock==0)
 	{
-		throttle1 = rc->THROTTLE - 1050 + gyro_pitch.output + gyro_roll.output - gyro_yaw.output;
-		throttle2 = rc->THROTTLE - 1050 + gyro_pitch.output - gyro_roll.output + gyro_yaw.output;
-		throttle3 = rc->THROTTLE - 1050 - gyro_pitch.output + gyro_roll.output + gyro_yaw.output;
-		throttle4 = rc->THROTTLE - 1050 - gyro_pitch.output - gyro_roll.output - gyro_yaw.output;
+		throttle1 = rc->THROTTLE - 50 + gyro_pitch.output + gyro_roll.output - gyro_yaw.output;
+		throttle2 = rc->THROTTLE - 50 + gyro_pitch.output - gyro_roll.output + gyro_yaw.output;
+		throttle3 = rc->THROTTLE - 50 - gyro_pitch.output + gyro_roll.output + gyro_yaw.output;
+		throttle4 = rc->THROTTLE - 50 - gyro_pitch.output - gyro_roll.output - gyro_yaw.output;
 	}
 	else
 	{
@@ -225,7 +225,7 @@ void Control_Gyro(struct _SI_float *gyro,struct _Rc *rc,uint8_t Lock)
 		throttle3=0;
 		throttle4=0;
 	}
-	Motor_Out(throttle1+1000,throttle2+1000,throttle3+1000,throttle4+1000);
+	Motor_Out(throttle1,throttle2,throttle3,throttle4);
 
 }
 
